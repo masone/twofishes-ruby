@@ -29,15 +29,11 @@ module Twofishes
     # @example
     #     Twofishes::Client.reverse_geocode(47.3787733, 8.5273363)
     #
-    def self.reverse_geocode(lat, lng)
-      call_api(ll: [lat, lng].join(','))
+    def self.reverse_geocode(coordinates)
+      call_api(ll: coordinates.join(','))
     end
 
     def self.call_api(params)
-      self.new.call_api(params)
-    end
-
-    def call_api(params)
       handle_response do
         get('/', query: params)
       end
@@ -45,8 +41,13 @@ module Twofishes
 
     private
 
-    def handle_response
-      Result.new(yield)
+    def self.handle_response
+      response = yield
+      if response.code == 200
+        Result.from_response(response)
+      else
+        raise Twofishes::Errors::InvalidResponse, response.to_s.lines.first
+      end
     end
 
   end

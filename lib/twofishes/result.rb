@@ -5,7 +5,16 @@ module Twofishes
   class Result
 
     def initialize(hash)
+      # TODO: underscore hash keys
       @data = Hashie::Mash.new(hash)
+    end
+
+    def self.from_response(hash)
+      if hash['interpretations']
+        hash['interpretations'].map { |interpretation| self.new(interpretation) }
+      else
+        []
+      end
     end
 
     def name
@@ -33,7 +42,7 @@ module Twofishes
     end
 
     def parents
-      @data.parents.map{|parent| Twofishes::Result.new(parent) }
+      @data.parents.map { |parent| Twofishes::Result.new(parent) }
     end
 
     def method_missing(method_sym, *arguments, &block)

@@ -2,22 +2,26 @@ require 'test_helper'
 
 describe Twofishes::Client do
 
-  describe "geocode" do
-
-    it "should call the api" do
-      Twofishes::Client.any_instance.expects(:get).returns({})
-      Twofishes::Client.geocode('zurich')
-    end
-
+  it "should geocode" do
+    FakeWeb.register_uri(:get, 'http://localhost:8081/?query=zurich', :status => 200, :body => '{}')
+    Twofishes::Client.geocode('zurich')
   end
 
-  describe "reverse_geocode" do
+  it "should reverse geocode" do
+    FakeWeb.register_uri(:get, 'http://localhost:8081/?ll=0%2C0', :status => 200, :body => '{}')
+    Twofishes::Client.reverse_geocode([0, 0])
+  end
 
-    it "should call the api" do
-      Twofishes::Client.any_instance.expects(:get).returns({})
-      Twofishes::Client.reverse_geocode(0,0)
+  it "should call api" do
+    FakeWeb.register_uri(:get, 'http://localhost:8081/?query=zurich', :status => 200, :body => '{}')
+    Twofishes::Client.call_api({query: 'zurich'})
+  end
+
+  it "should raise an error" do
+    FakeWeb.register_uri(:get, 'http://localhost:8081', :status => 500, :body => 'java.lang.NumberFormatException: For input string: ""')
+    assert_raises Twofishes::Errors::InvalidResponse do
+      Twofishes::Client.call_api({})
     end
-
   end
 
 end
