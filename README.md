@@ -25,7 +25,14 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Use the following methods to geocode / reverse geocode.
+
+    Twofishes::Client.reverse_geocode([0, 0])
+    Twofishes::Client.geocode('zurich')
+
+If you want more control over the params, you can also use the ```call_api``` method directly.
+
+    Twofishes::Client.call_api({query: 'zurich'})
 
 ## Contributing
 
