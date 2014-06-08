@@ -21,7 +21,7 @@ module Twofishes
     end
 
     def display_name
-      feature.displayName
+      feature.display_name
     end
 
     def country_code
