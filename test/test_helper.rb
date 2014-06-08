@@ -1,3 +1,4 @@
+require "codeclimate-test-reporter"
 require 'twofishes'
 require 'minitest/unit'
 require 'minitest/autorun'
@@ -6,3 +7,4 @@ require 'mocha/mini_test'
 require 'fakeweb'
 
 FakeWeb.allow_net_connect = false
+CodeClimate::TestReporter.start
