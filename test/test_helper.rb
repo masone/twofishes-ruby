@@ -8,4 +8,4 @@ require 'minitest/pride'
 require 'mocha/mini_test'
 require 'fakeweb'
 
-FakeWeb.allow_net_connect = false
+FakeWeb.allow_net_connect = /^https:\/\/codeclimate\.com/
