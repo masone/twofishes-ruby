@@ -16,10 +16,6 @@ module Twofishes
     @configuration ||= Configuration.new
   end
 
-  def self.configuration=(config)
-    @configuration = config
-  end
-
   def self.configure
     yield configuration
   end
