@@ -5,8 +5,7 @@ module Twofishes
   class Result
 
     def initialize(hash)
-      # TODO: underscore hash keys
-      @data = Hashie::Mash.new(hash)
+      @data = Hashie::Mash.new(hash.rubyify_keys!)
     end
 
     def self.from_response(hash)
