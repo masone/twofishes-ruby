@@ -1,0 +1,19 @@
+script:
+  - bundle exec rake test
+
+notifications:
+  email:
+    - ema@rh-productions.ch
+
+addons:
+  code_climate:
+    repo_token: d566f1ba4c52a62322083bfdd61243d39321b8c10390b6fcec556ee489d60e97
+
+
+language: ruby
+
+rvm:
+  - ruby-2.0.0
+
+cache:
+  - bundler
