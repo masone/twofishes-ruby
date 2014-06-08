@@ -33,8 +33,6 @@ module Twofishes
       call_api(ll: [lat, lng].join(','))
     end
 
-    private
-
     def self.call_api(params)
       self.new.call_api(params)
     end
@@ -44,6 +42,8 @@ module Twofishes
         get('/', query: params)
       end
     end
+
+    private
 
     def handle_response
       Result.new(yield)
