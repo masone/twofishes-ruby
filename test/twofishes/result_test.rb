@@ -34,6 +34,10 @@ describe Twofishes::Result do
       assert_equal 'CH', result.country_code
     end
 
+    it "should return name" do
+      assert_equal 'Zürich', result.name
+    end
+
     it "should return display_name" do
       assert_equal 'Zürich, Switzerland', result.display_name
     end
