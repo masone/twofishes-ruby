@@ -1,6 +1,9 @@
-# Twofishes
+Twofishes [![Build Status](https://travis-ci.org/masone/twofishes-ruby.svg?branch=master)](https://travis-ci.org/masone/twofishes-ruby) [![Code Climate](https://codeclimate.com/repos/539493ee69568044cb013dde/badges/385f7d64548a83e99792/gpa.png)](https://codeclimate.com/repos/539493ee69568044cb013dde/feed) [![Dependency Status](https://gemnasium.com/masone/twofishes-ruby.svg)](https://gemnasium.com/masone/twofishes-ruby)
+========
 
 A client/wrapper for foursquare's sparse geocoding / reverse geocoding server Twofishes (https://github.com/foursquare/twofishes).
+
+[![Code Climate](https://codeclimate.com/repos/539493ee69568044cb013dde/badges/385f7d64548a83e99792/gpa.png)](https://codeclimate.com/repos/539493ee69568044cb013dde/feed)
 
 ## Installation
 
