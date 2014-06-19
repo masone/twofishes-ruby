@@ -5,7 +5,6 @@ module Twofishes
     # @see https://github.com/foursquare/twofishes/blob/master/docs/twofishes_requests.md
 
     include HTTParty
-    base_uri Twofishes.configuration.base_url
     # debug_output $stderr # httparty debugging
 
     # Geocodes a given string.
@@ -35,7 +34,7 @@ module Twofishes
 
     def self.call_api(params)
       handle_response do
-        get('/', query: params)
+        get(Twofishes.configuration.base_url, query: params)
       end
     end
 
