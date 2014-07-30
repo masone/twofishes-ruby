@@ -34,6 +34,10 @@ If you want more control over the params, you can also use the ```call_api``` me
 
     Twofishes::Client.call_api({query: 'zurich'})
 
+## Compatibility
+
+Ruby ~> 2.0 and ~> 2.1
+
 ## Contributing
 
 1. Fork it ( http://github.com/masone/twofishes/fork )
