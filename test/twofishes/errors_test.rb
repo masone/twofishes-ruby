@@ -1,15 +1,15 @@
 require 'test_helper'
 
-describe Twofishes::Errors do
+describe Twofishes::InvalidResponseError do
 
-  it "should raise Errors::InvalidResponse" do
-    assert_raises Twofishes::Errors::InvalidResponse do
-      raise Twofishes::Errors::InvalidResponse, 'test'
+  it "should raise InvalidResponseError" do
+    assert_raises Twofishes::InvalidResponseError do
+      raise Twofishes::InvalidResponseError, 'test'
     end
   end
 
   it "should be a StandardError" do
-    Twofishes::Errors::InvalidResponse.new.is_a?(StandardError)
+    Twofishes::InvalidResponseError.new.is_a?(StandardError)
   end
 
 end

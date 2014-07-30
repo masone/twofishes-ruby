@@ -19,7 +19,7 @@ describe Twofishes::Client do
 
   it "should raise an error" do
     FakeWeb.register_uri(:get, 'http://localhost:8081', :status => 500, :body => 'java.lang.NumberFormatException: For input string: ""')
-    assert_raises Twofishes::Errors::InvalidResponse do
+    assert_raises Twofishes::InvalidResponseError do
       Twofishes::Client.call_api({})
     end
   end

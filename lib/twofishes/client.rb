@@ -45,7 +45,7 @@ module Twofishes
       if response.code == 200
         Result.from_response(response)
       else
-        raise Twofishes::Errors::InvalidResponse, response.to_s.lines.first
+        raise Twofishes::InvalidResponseError, response.to_s.lines.first
       end
     end
 
