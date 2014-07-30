@@ -1,5 +1,5 @@
 require 'httparty'
-require 'hashieequires'
+require 'hashie'
 require 'hash'
 require 'string'
 require "twofishes/version"
