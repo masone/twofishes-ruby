@@ -22,7 +22,7 @@ describe Twofishes::Result do
 
     it "should return fields from response" do
       assert_equal 'pizza', result.what
-      assert_equal 'zurich', result.where
+      assert_equal 'zürich', result.where
     end
 
     it "should return fields with nested data" do
@@ -35,11 +35,11 @@ describe Twofishes::Result do
     end
 
     it "should return name" do
-      assert_equal 'Zurich', result.name
+      assert_equal 'Zürich', result.name
     end
 
     it "should return display_name" do
-      assert_equal 'Zurich, Switzerland', result.display_name
+      assert_equal 'Zürich, Switzerland', result.display_name
     end
 
     it "should return lat" do
@@ -60,7 +60,7 @@ describe Twofishes::Result do
     end
 
     it "should rubyfy keys" do
-      assert_equal 'Zurich, Switzerland', result.feature.display_name
+      assert_equal 'Zürich, Switzerland', result.feature.display_name
     end
 
   end
@@ -70,7 +70,7 @@ describe Twofishes::Result do
         'interpretations' => [
             {
                 'what' => "pizza",
-                'where' => "zurich",
+                'where' => "zürich",
                 'feature' => {
                     'cc' => "CH",
                     'geometry' => {
@@ -89,8 +89,8 @@ describe Twofishes::Result do
                             }
                         },
                     },
-                    'name' => "Zurich",
-                    'displayName' => "Zurich, Switzerland",
+                    'name' => "Zürich",
+                    'displayName' => "Zürich, Switzerland",
                     'woeType' => "7 (TOWN)",
                     'ids' => [
                         {
@@ -100,12 +100,12 @@ describe Twofishes::Result do
                     ],
                     'names' => [
                         {
-                            'name' => "Zurich",
+                            'name' => "Zürich",
                             'lang' => "hbs",
                             'flags' => []
                         },
                         {
-                            'name' => "Zurich",
+                            'name' => "Zürich",
                             'lang' => "fi",
                             'flags' => []
                         },
@@ -120,8 +120,8 @@ describe Twofishes::Result do
                             'flags' => []
                         },
                     ],
-                    'highlightedName' => "Zurich, Switzerland",
-                    'matchedName' => "Zurich, Switzerland",
+                    'highlightedName' => "Zürich, Switzerland",
+                    'matchedName' => "Zürich, Switzerland",
                     'id' => "'geonameid' =>2657896",
                     'attributes' => {
                         'adm0cap' => 0,
@@ -162,8 +162,8 @@ describe Twofishes::Result do
                                 }
                             }
                         },
-                        'name' => "Zurich",
-                        'displayName' => "Zurich, Switzerland",
+                        'name' => "Zürich",
+                        'displayName' => "Zürich, Switzerland",
                         'woeType' => "10 (ADMIN3)",
                         'ids' => [
                             {
@@ -188,7 +188,7 @@ describe Twofishes::Result do
                                 ]
                             },
                             {
-                                'name' => "Zurich",
+                                'name' => "Zürich",
                                 'lang' => "en",
                                 'flags' => [
                                     "1 (PREFERRED)"
@@ -224,8 +224,8 @@ describe Twofishes::Result do
                                 }
                             }
                         },
-                        'name' => "Bezirk Zurich",
-                        'displayName' => "Bezirk Zurich, Switzerland",
+                        'name' => "Bezirk Zürich",
+                        'displayName' => "Bezirk Zürich, Switzerland",
                         'woeType' => "9 (ADMIN2)",
                         'ids' => [
                             {
@@ -257,7 +257,7 @@ describe Twofishes::Result do
                                 ]
                             },
                             {
-                                'name' => "Zurich",
+                                'name' => "Zürich",
                                 'lang' => "de",
                                 'flags' => [
                                     "16 (LOCAL_LANG)",
@@ -265,7 +265,7 @@ describe Twofishes::Result do
                                 ]
                             },
                             {
-                                'name' => "Bezirk Zurich",
+                                'name' => "Bezirk Zürich",
                                 'lang' => "en",
                                 'flags' => [
                                     "1 (PREFERRED)"
@@ -368,7 +368,7 @@ describe Twofishes::Result do
                                 ]
                             },
                             {
-                                'name' => "Kanton Zurich",
+                                'name' => "Kanton Zürich",
                                 'lang' => "",
                                 'flags' => []
                             },
@@ -434,7 +434,7 @@ describe Twofishes::Result do
                                 ]
                             },
                             {
-                                'name' => "Zurich",
+                                'name' => "Zürich",
                                 'lang' => "de",
                                 'flags' => [
                                     "128 (SHORT_NAME)",
@@ -442,12 +442,12 @@ describe Twofishes::Result do
                                 ]
                             },
                             {
-                                'name' => "Kanton Zurich",
+                                'name' => "Kanton Zürich",
                                 'lang' => "en",
                                 'flags' => []
                             },
                             {
-                                'name' => "Kanton Zurich",
+                                'name' => "Kanton Zürich",
                                 'lang' => "de",
                                 'flags' => [
                                     "16 (LOCAL_LANG)",
@@ -464,7 +464,7 @@ describe Twofishes::Result do
                                 ]
                             },
                             {
-                                'name' => "Zurich",
+                                'name' => "Zürich",
                                 'lang' => "",
                                 'flags' => []
                             }
