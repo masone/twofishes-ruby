@@ -1,4 +1,5 @@
-require 'api_smith'
+require 'httparty'
+require 'hashieequires'
 require 'hash'
 require 'string'
 require "twofishes/version"
