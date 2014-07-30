@@ -2,9 +2,10 @@ require 'test_helper'
 
 describe Twofishes::Result do
 
-  describe "results" do
+  let(:results) { Twofishes::Result.from_response(response) }
+  let(:result) { Twofishes::Result.new(response['interpretations'].first) }
 
-    let(:results) { Twofishes::Result.from_response(response) }
+  describe "results" do
 
     it "should return an Array" do
       assert results.is_a? Array
@@ -17,8 +18,6 @@ describe Twofishes::Result do
   end
 
   describe "result" do
-
-    let(:result) { Twofishes::Result.new(response['interpretations'].first) }
 
     it "should return fields from response" do
       assert_equal 'pizza', result.what
@@ -63,6 +62,18 @@ describe Twofishes::Result do
       assert_equal 'Zürich, Switzerland', result.feature.display_name
     end
 
+    it "should return nil for missing key" do
+      assert_equal nil, result.foobar
+    end
+
+  end
+
+  it "should respond to existing key" do
+    assert result.respond_to?(:feature)
+  end
+
+  it "should respond to missing key" do
+    assert_equal false, result.respond_to?(:foobar)
   end
 
   def response

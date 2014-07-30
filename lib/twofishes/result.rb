@@ -48,5 +48,9 @@ module Twofishes
       @data.send(method_sym)
     end
 
+    def respond_to?(method_sym, include_private=false)
+      @data.respond_to?(method_sym) ? true : super
+    end
+
   end
 end
