@@ -6,11 +6,11 @@ require 'twofishes/version'
 Gem::Specification.new do |spec|
   spec.name          = "twofishes"
   spec.version       = Twofishes::VERSION
-  spec.authors       = ["Christian Felder (masone)"]
+  spec.authors       = ["Christian Felder"]
   spec.email         = ["ema@rh-productions.ch"]
-  spec.summary       = "Client for foursquare's Twofishes API, a sparse reverse geocode."
-  # spec.description   = %q{TODO: Write a longer description. Optional.}
-  spec.homepage      = ""
+  spec.summary       = "Client for foursquare's Twofishes API, a sparse reverse geocoder."
+  spec.description   = "Client for foursquare's Twofishes API, a sparse reverse geocoder."
+  spec.homepage      = "https://github.com/masone/twofishes-ruby"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
