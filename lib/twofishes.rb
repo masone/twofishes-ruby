@@ -1,7 +1,3 @@
-require 'httparty'
-require 'hashie'
-require 'hash'
-require 'string'
 require "twofishes/version"
 require "twofishes/configuration"
 require "twofishes/errors"

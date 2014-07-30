@@ -1,11 +1,11 @@
-require 'hashie/mash'
+require 'rash'
 
 module Twofishes
 
   class Result
 
     def initialize(hash)
-      @data = Hashie::Mash.new(hash.rubyify_keys!)
+      @data = Hashie::Rash.new(hash)
     end
 
     def self.from_response(hash)
