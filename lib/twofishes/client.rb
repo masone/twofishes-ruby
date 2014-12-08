@@ -34,7 +34,7 @@ module Twofishes
 
     def self.call_api(params)
       handle_response do
-        get(Twofishes.configuration.base_url, query: params)
+        get(Twofishes.configuration.base_url, query: params, timeout: Twofishes.configuration.timeout)
       end
     end
 

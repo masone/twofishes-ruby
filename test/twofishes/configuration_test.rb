@@ -16,6 +16,10 @@ describe Twofishes::Configuration do
     assert_equal 'http://localhost:8081', configuration.base_url
   end
 
+  it "should return default timeout" do
+    assert_equal 3, configuration.timeout
+  end
+
   it "should reset configuration" do
     Twofishes.configure do |config|
       config.base_url = 'http://demo.twofishes.net'
