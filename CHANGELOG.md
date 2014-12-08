@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.1
+
+* Adds timeout option, configurable with `Twofishes.configure`
+
 ## 1.0.0
 
 Initial stable version.

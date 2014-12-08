@@ -21,6 +21,7 @@ Or install it yourself as:
 
     Twofishes.configure do |config|
       config.base_url = 'http://mytwofishes.com:8081'
+      config.timeout = 3 # in seconds
     end
 
 ## Usage
