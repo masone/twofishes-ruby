@@ -1,11 +1,7 @@
-require 'rash'
-
 module Twofishes
-
   class Result
-
     def initialize(hash)
-      @data = Hashie::Rash.new(hash)
+      @data = hash
     end
 
     def self.from_response(hash)
@@ -16,41 +12,51 @@ module Twofishes
       end
     end
 
-    def name
-      feature.name
+    def what
+      @data['what']
     end
 
-    def display_name
-      feature.display_name
+    def where
+      @data['where']
     end
 
     def country_code
-      feature.cc
+      feature['cc']
     end
 
     def lat
-      feature.geometry.center.lat
+      feature['geometry']['center']['lat']
     end
 
     def lng
-      feature.geometry.center.lng
+      feature['geometry']['center']['lng']
     end
 
     def coordinates
       [lat, lng]
     end
 
+    def feature
+      @data['feature']
+    end
+
     def parents
-      @data.parents.map { |parent| Twofishes::Result.new(parent) }
+      @data['parents'].map { |parent| Twofishes::Result.new(parent) }
     end
 
     def method_missing(method_sym, *arguments, &block)
-      @data.send(method_sym)
+      return super unless respond_to?(method_sym)
+      feature.send(:[], derubyfy_key(method_sym))
     end
 
-    def respond_to?(method_sym, include_private=false)
-      @data.respond_to?(method_sym) ? true : super
+    def respond_to?(method_sym, include_private = false)
+      feature.include?(derubyfy_key(method_sym)) ? true : super
     end
 
+    private
+
+    def derubyfy_key(key)
+      key.to_s.gsub(/_[a-z]/) { |m| m[1].upcase }
+    end
   end
 end
