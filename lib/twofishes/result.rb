@@ -1,7 +1,7 @@
 module Twofishes
   class Result
     def initialize(hash)
-      @data = hash
+      @data = ResultFields.new(hash)
     end
 
     def self.from_response(hash)
@@ -12,51 +12,40 @@ module Twofishes
       end
     end
 
-    def what
-      @data['what']
+    def name
+      feature.name
     end
 
-    def where
-      @data['where']
+    def display_name
+      feature.display_name
     end
 
     def country_code
-      feature['cc']
+      feature.cc
     end
 
     def lat
-      feature['geometry']['center']['lat']
+      feature.geometry.center.lat
     end
 
     def lng
-      feature['geometry']['center']['lng']
+      feature.geometry.center.lng
     end
 
     def coordinates
       [lat, lng]
     end
 
-    def feature
-      @data['feature']
-    end
-
     def parents
-      @data['parents'].map { |parent| Twofishes::Result.new(parent) }
+      @data.parents.map { |parent| Twofishes::Result.new(parent) }
     end
 
-    def method_missing(method_sym, *arguments, &block)
-      return super unless respond_to?(method_sym)
-      feature.send(:[], derubyfy_key(method_sym))
+    def method_missing(name, *args, &block)
+      @data.send(name)
     end
 
-    def respond_to?(method_sym, include_private = false)
-      feature.include?(derubyfy_key(method_sym)) ? true : super
-    end
-
-    private
-
-    def derubyfy_key(key)
-      key.to_s.gsub(/_[a-z]/) { |m| m[1].upcase }
+    def respond_to?(name, include_private = false)
+      @data.include?(name) || super
     end
   end
 end

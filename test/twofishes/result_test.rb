@@ -26,7 +26,7 @@ describe Twofishes::Result do
 
     it "should return fields with nested data" do
       geometry = response['interpretations'].first['feature']['geometry']
-      assert_equal geometry, result.geometry
+      assert_equal geometry, result.feature.geometry.to_hash
     end
 
     it "should return country_code" do
@@ -37,7 +37,7 @@ describe Twofishes::Result do
       assert_equal 'Zürich', result.name
     end
 
-    it "should return display_name (rubyfied)" do
+    it "should return display_name" do
       assert_equal 'Zürich, Switzerland', result.display_name
     end
 
@@ -58,10 +58,12 @@ describe Twofishes::Result do
       assert result.parents.first.is_a? Twofishes::Result
     end
 
-    it "should raise exception for missing key" do
-      assert_raises(NoMethodError) do 
-        result.foobar
-      end
+    it "should rubyfy keys" do
+      assert_equal 'Zürich, Switzerland', result.feature.display_name
+    end
+
+    it "should return nil for missing key" do
+      assert_equal nil, result.foobar
     end
 
   end

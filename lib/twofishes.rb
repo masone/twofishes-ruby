@@ -1,5 +1,6 @@
 require "twofishes/version"
 require "twofishes/configuration"
 require "twofishes/errors"
+require "twofishes/result_fields"
 require "twofishes/result"
 require "twofishes/client"
