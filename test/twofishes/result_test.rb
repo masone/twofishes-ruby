@@ -62,8 +62,10 @@ describe Twofishes::Result do
       assert_equal 'Zürich, Switzerland', result.feature.display_name
     end
 
-    it "should return nil for missing key" do
-      assert_equal nil, result.foobar
+    it "should raise NoMethodError for missing key" do
+      assert_raises(NoMethodError) do
+        result.foobar
+      end
     end
 
   end

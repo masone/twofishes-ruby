@@ -1,5 +1,7 @@
 module Twofishes
   class Result
+    extend Forwardable
+
     def initialize(hash)
       @data = ResultFields.new(hash)
     end
@@ -12,17 +14,12 @@ module Twofishes
       end
     end
 
-    def name
-      feature.name
-    end
-
-    def display_name
-      feature.display_name
-    end
-
-    def country_code
-      feature.cc
-    end
+    def_delegator :@data, :what
+    def_delegator :@data, :where
+    def_delegator :@data, :feature
+    def_delegator :feature, :name
+    def_delegator :feature, :display_name
+    def_delegator :feature, :cc, :country_code
 
     def lat
       feature.geometry.center.lat
@@ -37,15 +34,7 @@ module Twofishes
     end
 
     def parents
-      @data.parents.map { |parent| Twofishes::Result.new(parent) }
-    end
-
-    def method_missing(name, *args, &block)
-      @data.send(name)
-    end
-
-    def respond_to?(name, include_private = false)
-      @data.include?(name) || super
+      @data.parents.to_a.map { |parent| Twofishes::Result.new(parent) }
     end
   end
 end
