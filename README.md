@@ -40,9 +40,11 @@ If you want more control over the params, you can also use the ```call_api``` me
 Ruby 2+
 
 ## Generating thrift files
+
 ```
 ❯ thrift --gen rb -o /path/to/lib /path/to/twofishes-master/interface/src/main/thrift/geocoder.thrift
 ```
+Then move out of `gen-rb` folder to `twofishes` folder and remove `require`s.
 
 ## Contributing
 

@@ -4,9 +4,6 @@
 # DO NOT EDIT UNLESS YOU ARE SURE THAT YOU KNOW WHAT YOU ARE DOING
 #
 
-require 'thrift'
-require 'geocoder_types'
-
 module Geocoder
   class Client
     include ::Thrift::Client

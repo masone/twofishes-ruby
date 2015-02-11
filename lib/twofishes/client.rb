@@ -1,11 +1,6 @@
-require 'httparty'
-
 module Twofishes
   class Client
     # @see https://github.com/foursquare/twofishes/blob/master/docs/twofishes_requests.md
-
-    include HTTParty
-    # debug_output $stderr # httparty debugging
 
     # Geocodes a given string.
     #
@@ -16,7 +11,9 @@ module Twofishes
     #     Twofishes::Client.geocode('Zurich, Switzerland')
     #
     def self.geocode(location)
-      call_api(query: location)
+      handle_response do
+        client.geocode(GeocodeRequest.new(query: location))
+      end
     end
 
     # Reverse geocodes lat/lng.
@@ -29,25 +26,21 @@ module Twofishes
     #     Twofishes::Client.reverse_geocode(47.3787733, 8.5273363)
     #
     def self.reverse_geocode(coordinates)
-      call_api(ll: coordinates.join(','))
-    end
-
-    def self.call_api(params)
       handle_response do
-        get(Twofishes.configuration.base_url, query: params, timeout: Twofishes.configuration.timeout)
+        client.reverseGeocode(GeocodeRequest.new(ll: coordinates.join(',')))
       end
     end
 
     private
 
-    def self.handle_response
-      response = yield
-      if response.code == 200
-        Result.from_response(response)
-      else
-        raise Twofishes::InvalidResponseError, response.to_s.lines.first
-      end
+    def self.client
+      @@client ||= ThriftClient.new(Geocoder::Client, Twofishes.configuration.address, retries: Twofishes.configuration.retries)
     end
 
+    def self.handle_response
+      Result.from_response(yield)
+    rescue => e
+      raise Twofishes::InvalidResponseError, e.message
+    end
   end
 end

@@ -1,16 +1,13 @@
 module Twofishes
-
   class Configuration
-
     # @see https://github.com/thoughtbot/clearance/blob/master/lib/clearance/configuration.rb
 
-    attr_accessor :base_url, :timeout
+    attr_accessor :address, :retries
 
     def initialize
-      @base_url = 'http://localhost:8081'
-      @timeout = 3
+      @address = '127.0.0.1:8080'
+      @retries = 2
     end
-
   end
 
   def self.configuration
@@ -24,5 +21,4 @@ module Twofishes
   def self.reset_configuration
     @configuration = nil
   end
-
 end

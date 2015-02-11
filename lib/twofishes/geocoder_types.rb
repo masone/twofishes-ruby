@@ -4,8 +4,6 @@
 # DO NOT EDIT UNLESS YOU ARE SURE THAT YOU KNOW WHAT YOU ARE DOING
 #
 
-require 'thrift'
-
 module YahooWoeType
   UNKNOWN = 0
   TOWN = 7
@@ -757,4 +755,3 @@ class S2CellInfoResponse
 
   ::Thrift::Struct.generate_accessors self
 end
-

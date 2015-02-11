@@ -1,6 +1,9 @@
-require "twofishes/version"
-require "twofishes/configuration"
-require "twofishes/errors"
+require 'twofishes/version'
+require 'twofishes/configuration'
+require 'thrift_client'
+require 'twofishes/geocoder_types'
+require 'twofishes/geocoder'
+require 'twofishes/errors'
+require 'twofishes/result'
 require "twofishes/result_fields"
-require "twofishes/result"
-require "twofishes/client"
+require 'twofishes/client'
