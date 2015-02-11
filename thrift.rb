@@ -1,13 +1,8 @@
 $:.push('lib/gen-rb')
 require 'pry'
-require 'thrift'
+require 'thrift_client'
 require 'geocoder'
-port = 8080
-timeout = 5
-transport = Thrift::BufferedTransport.new(Thrift::Socket.new('localhost', port, timeout))
-protocol = Thrift::BinaryProtocol.new(transport)
-client = Geocoder::Client.new(protocol)
-transport.open
+
+client = ThriftClient.new(Geocoder::Client, '127.0.0.1:8080', retries: 2)
 location = GeocodeRequest.new(query: 'Ljubljana')
-p client.geocode(location)
-transport.close()
+client.geocode(location)
