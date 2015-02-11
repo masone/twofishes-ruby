@@ -37,7 +37,7 @@ If you want more control over the params, you can also use the ```call_api``` me
 
 ## Compatibility
 
-Ruby ~> 2.0 and ~> 2.1
+Ruby 2+
 
 ## Contributing
 
