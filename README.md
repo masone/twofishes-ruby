@@ -20,8 +20,8 @@ Or install it yourself as:
 ## Configuration
 
     Twofishes.configure do |config|
-      config.base_url = 'http://mytwofishes.com:8081'
-      config.timeout = 3 # in seconds
+      config.address = '127.0.0.1:8080'
+      config.retries = 2
     end
 
 ## Usage
@@ -30,10 +30,6 @@ Use the following methods to geocode / reverse geocode.
 
     Twofishes::Client.reverse_geocode([0, 0])
     Twofishes::Client.geocode('zurich')
-
-If you want more control over the params, you can also use the ```call_api``` method directly.
-
-    Twofishes::Client.call_api({query: 'zurich'})
 
 ## Compatibility
 
