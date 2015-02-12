@@ -25,9 +25,11 @@ module Twofishes
     # @example
     #     Twofishes::Client.reverse_geocode(47.3787733, 8.5273363)
     #
-    def self.reverse_geocode(coordinates)
+    def self.reverse_geocode(*coordinates)
       handle_response do
-        client.reverseGeocode(GeocodeRequest.new(ll: coordinates.join(',')))
+        coords = coordinates.flatten
+        point = GeocodePoint.new(lat: coords[0], lng: coords[1])
+        client.reverseGeocode(GeocodeRequest.new(ll: point))
       end
     end
 

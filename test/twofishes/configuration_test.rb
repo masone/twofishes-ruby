@@ -1,7 +1,6 @@
 require 'test_helper'
 
 describe Twofishes::Configuration do
-
   after do
     Twofishes.reset_configuration
   end
@@ -12,30 +11,29 @@ describe Twofishes::Configuration do
     assert configuration.is_a? Twofishes::Configuration
   end
 
-  it "should return default base_url" do
-    assert_equal 'http://localhost:8081', configuration.base_url
+  it "should return default address" do
+    assert_equal '127.0.0.1:8080', configuration.address
   end
 
-  it "should return default timeout" do
-    assert_equal 3, configuration.timeout
+  it "should return default retries" do
+    assert_equal 2, configuration.retries
   end
 
   it "should reset configuration" do
     Twofishes.configure do |config|
-      config.base_url = 'http://demo.twofishes.net'
+      config.address = '127.0.0.1:9090'
     end
     Twofishes.reset_configuration
 
-    assert_equal 'http://localhost:8081', configuration.base_url
+    assert_equal '127.0.0.1:8080', configuration.address
   end
 
-  it "should configure base_url" do
+  it "should configure address" do
     Twofishes.configure do |config|
-      config.base_url = 'http://demo.twofishes.net'
+      config.address = '127.0.0.1:9090'
     end
 
-    assert_equal 'http://demo.twofishes.net', configuration.base_url
+    assert_equal '127.0.0.1:9090', configuration.address
     Twofishes.reset_configuration
   end
-
 end
