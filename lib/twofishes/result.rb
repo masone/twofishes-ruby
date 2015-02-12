@@ -16,16 +16,16 @@ module Twofishes
       @interpretation = interpretation
     end
 
+    def country_code
+      cc
+    end
+
     def lat
-      feature.geometry.center.lat
+      geometry.center.lat
     end
 
     def lng
-      feature.geometry.center.lng
-    end
-
-    def country_code
-      feature.cc
+      geometry.center.lng
     end
 
     def coordinates
