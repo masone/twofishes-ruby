@@ -1,0 +1,62 @@
+--- !ruby/object:GeocodeResponse
+interpretations:
+- !ruby/object:GeocodeInterpretation
+  what: pizza
+  where: zürich
+  feature: !ruby/object:GeocodeFeature
+    woeType: 7
+    cc: CH
+    geometry: !ruby/object:FeatureGeometry
+      center: !ruby/object:GeocodePoint
+        lat: 47.36667
+        lng: 8.55
+      bounds: !ruby/object:GeocodeBoundingBox
+        ne: !ruby/object:GeocodePoint
+          lat: 47.47401949999994
+          lng: 8.63605549999994
+        sw: !ruby/object:GeocodePoint
+          lat: 47.27143099999995
+          lng: 8.380589499999815
+      source: qs
+    name: Zürich
+    displayName: Zürich, Switzerland
+    ids:
+    - !ruby/object:FeatureId
+      source: geonameid
+      id: '2657896'
+    - !ruby/object:FeatureId
+      source: woeid
+      id: '12682746'
+    - !ruby/object:FeatureId
+      source: woeid
+      id: '784794'
+    names:
+    - !ruby/object:FeatureName
+      flags:
+      - 4
+      name: Zurich
+      lang: en
+    - !ruby/object:FeatureName
+      flags: []
+      name: Zürich
+      lang: en
+    highlightedName: "<b>Zürich</b>, <b>Switzerland</b>"
+    matchedName: Zürich, Switzerland
+    id: geonameid:2657896
+    attributes: !ruby/object:GeocodeFeatureAttributes
+      adm0cap: false
+      adm1cap: true
+      scalerank: 2
+      labelrank: 7
+      natscale: 200
+      population: 341730
+      sociallyRelevant: false
+      worldcity: false
+    longId: 72057594040585832
+    longIds:
+    - 72057594040585831
+    parentIds:
+    - 72057594040586370
+    - 72057594040585831
+    - 72057594044386734
+    - 72057594045215586

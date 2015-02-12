@@ -4,40 +4,44 @@ module Twofishes
 
     # Geocodes a given string.
     #
-    # @param [String] query
+    # @param [String] location
     # @return [Twofishes::Result]
     #
     # @example
-    #     Twofishes::Client.geocode('Zurich, Switzerland')
+    #   Twofishes::Client.geocode('Zurich, Switzerland')
     #
     def self.geocode(location)
       handle_response do
-        client.geocode(GeocodeRequest.new(query: location))
+        thrift_client.geocode(GeocodeRequest.new(query: location))
       end
     end
 
     # Reverse geocodes lat/lng.
     #
-    # @param [Float] lat
-    # @param [Float] lng
-    # @return [Twofishes::Result]
-    #
+    # @overload reverse_geocode(lat, lng)
+    #   @param [Float] latitude
+    #   @param [Float] longitude
+    #   @return [Twofishes::Result]
+    # @overload reverse_geocode([lat, lng])
+    #   @param [Array] latitude, longitude pair
+    #   @return [Twofishes::Result]
     # @example
-    #     Twofishes::Client.reverse_geocode(47.3787733, 8.5273363)
+    #   Twofishes::Client.reverse_geocode(47.3787733, 8.5273363)
+    #   Twofishes::Client.reverse_geocode([47.3787733, 8.5273363])
     #
     def self.reverse_geocode(*coordinates)
       handle_response do
         coords = coordinates.flatten
         point = GeocodePoint.new(lat: coords[0], lng: coords[1])
-        client.reverseGeocode(GeocodeRequest.new(ll: point))
+        thrift_client.reverseGeocode(GeocodeRequest.new(ll: point))
       end
     end
 
-    private
-
-    def self.client
-      @@client ||= ThriftClient.new(Geocoder::Client, Twofishes.configuration.address, retries: Twofishes.configuration.retries)
+    def self.thrift_client
+      @@thrift_client ||= ThriftClient.new(Geocoder::Client, Twofishes.configuration.address, retries: Twofishes.configuration.retries)
     end
+
+    private
 
     def self.handle_response
       Result.from_response(yield)
