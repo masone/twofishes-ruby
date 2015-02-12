@@ -4,11 +4,7 @@ require 'active_support/core_ext/string/inflections'
 module Twofishes
   class Result
     extend Forwardable
-
-    def_delegator :@interpretation, :what
-    def_delegator :@interpretation, :where
-    def_delegator :@interpretation, :feature
-    def_delegator :feature, :cc, :country_code
+    def_delegators :@interpretation, :what, :where, :feature
 
     def self.from_response(response)
       response.interpretations.map { |interpretation|
@@ -26,6 +22,10 @@ module Twofishes
 
     def lng
       feature.geometry.center.lng
+    end
+
+    def country_code
+      feature.cc
     end
 
     def coordinates
