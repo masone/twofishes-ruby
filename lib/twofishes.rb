@@ -5,5 +5,4 @@ require 'twofishes/geocoder_types'
 require 'twofishes/geocoder'
 require 'twofishes/errors'
 require 'twofishes/result'
-require "twofishes/result_fields"
 require 'twofishes/client'

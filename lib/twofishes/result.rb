@@ -1,24 +1,23 @@
+require 'forwardable'
+require 'active_support/core_ext/string/inflections'
+
 module Twofishes
   class Result
     extend Forwardable
 
-    def initialize(hash)
-      @data = ResultFields.new(hash)
+    def initialize(interpretation)
+      @interpretation = interpretation
     end
 
-    def self.from_response(hash)
-      if hash['interpretations']
-        hash['interpretations'].map { |interpretation| self.new(interpretation) }
-      else
-        []
-      end
+    def self.from_response(response)
+      response.interpretations.map { |interpretation|
+        new(interpretation)
+      }
     end
 
-    def_delegator :@data, :what
-    def_delegator :@data, :where
-    def_delegator :@data, :feature
-    def_delegator :feature, :name
-    def_delegator :feature, :display_name
+    def_delegator :@interpretation, :what
+    def_delegator :@interpretation, :where
+    def_delegator :@interpretation, :feature
     def_delegator :feature, :cc, :country_code
 
     def lat
@@ -33,8 +32,13 @@ module Twofishes
       [lat, lng]
     end
 
-    def parents
-      @data.parents.to_a.map { |parent| Twofishes::Result.new(parent) }
+    def method_missing(name, *args, &block)
+      camelized = name.to_s.camelize(:lower)
+      feature.respond_to?(camelized) ? feature.send(camelized) : super
+    end
+
+    def respond_to_missing?(name, include_private = false)
+      feature.respond_to?(name.to_s.camelize(:lower)) || super
     end
   end
 end
