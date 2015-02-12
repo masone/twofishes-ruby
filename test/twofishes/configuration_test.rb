@@ -7,19 +7,19 @@ describe Twofishes::Configuration do
 
   let(:configuration){ Twofishes.configuration }
 
-  it "should return configuration" do
+  it 'should return configuration' do
     assert configuration.is_a? Twofishes::Configuration
   end
 
-  it "should return default address" do
+  it 'should return default address' do
     assert_equal '127.0.0.1:8080', configuration.address
   end
 
-  it "should return default retries" do
+  it 'should return default retries' do
     assert_equal 2, configuration.retries
   end
 
-  it "should reset configuration" do
+  it 'should reset configuration' do
     Twofishes.configure do |config|
       config.address = '127.0.0.1:9090'
     end
@@ -28,7 +28,7 @@ describe Twofishes::Configuration do
     assert_equal '127.0.0.1:8080', configuration.address
   end
 
-  it "should configure address" do
+  it 'should configure address' do
     Twofishes.configure do |config|
       config.address = '127.0.0.1:9090'
     end
