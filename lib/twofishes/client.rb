@@ -19,20 +19,13 @@ module Twofishes
 
     # Reverse geocodes lat/lng.
     #
-    # @overload reverse_geocode(lat, lng)
-    #   @param [Float] latitude
-    #   @param [Float] longitude
-    #   @return [Twofishes::Result]
-    # @overload reverse_geocode([lat, lng])
-    #   @param [Array] latitude, longitude pair
-    #   @return [Twofishes::Result]
+    # @param [Array] latitude, longitude pair
+    # @return [Twofishes::Result]
     # @example
-    #   Twofishes::Client.reverse_geocode(47.3787733, 8.5273363)
     #   Twofishes::Client.reverse_geocode([47.3787733, 8.5273363])
     #
-    def self.reverse_geocode(*coordinates)
+    def self.reverse_geocode(coords)
       handle_response do
-        coords = coordinates.flatten
         point = GeocodePoint.new(lat: coords[0], lng: coords[1])
         thrift_client.reverseGeocode(GeocodeRequest.new(ll: point))
       end

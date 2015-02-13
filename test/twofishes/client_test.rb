@@ -13,10 +13,5 @@ module Twofishes
       Twofishes::Client.thrift_client.stubs(:reverseGeocode).returns(response)
       Twofishes::Client.reverse_geocode([0, 0]).first.is_a? Result
     end
-
-    it 'should reverse geocode with two params' do
-      Twofishes::Client.thrift_client.stubs(:reverseGeocode).returns(response)
-      Twofishes::Client.reverse_geocode(0, 0).first.is_a? Result
-    end
   end
 end
