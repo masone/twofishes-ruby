@@ -1,11 +1,6 @@
-require 'forwardable'
-require 'active_support/core_ext/string/inflections'
-
+require 'delegate'
 module Twofishes
-  class Result
-    extend Forwardable
-    def_delegators :@interpretation, :what, :where, :feature
-
+  class Result < SimpleDelegator
     def self.from_response(response)
       response.interpretations.map { |interpretation|
         new(interpretation)
@@ -13,32 +8,29 @@ module Twofishes
     end
 
     def initialize(interpretation)
-      @interpretation = interpretation
+      super
     end
+  end
+end
 
-    def country_code
-      cc
-    end
+require 'forwardable'
+class GeocodeInterpretation
+  extend Forwardable
+  def_delegators :feature, *GeocodeFeature::FIELDS.map { |_, v| v[:name] }
 
-    def lat
-      geometry.center.lat
-    end
+  def country_code
+    cc
+  end
 
-    def lng
-      geometry.center.lng
-    end
+  def lat
+    geometry.center.lat
+  end
 
-    def coordinates
-      [lat, lng]
-    end
+  def lng
+    geometry.center.lng
+  end
 
-    def method_missing(name, *args, &block)
-      camelized = name.to_s.camelize(:lower)
-      feature.respond_to?(camelized) ? feature.send(camelized) : super
-    end
-
-    def respond_to_missing?(name, include_private = false)
-      feature.respond_to?(name.to_s.camelize(:lower)) || super
-    end
+  def coordinates
+    [lat, lng]
   end
 end
