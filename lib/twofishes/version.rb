@@ -1,3 +1,3 @@
 module Twofishes
-  VERSION = "1.0.1"
+  VERSION = "2.0.0-rc.1"
 end

@@ -28,8 +28,11 @@ Or install it yourself as:
 
 Use the following methods to geocode / reverse geocode.
 
+    Twofishes::Client.geocode('ljubljana')
+    Twofishes::Client.geocode('zurich', [ResponseIncludes::PARENTS])
     Twofishes::Client.reverse_geocode([0, 0])
-    Twofishes::Client.geocode('zurich')
+
+If you want `.geocode` to return more fields look at `ResponseIncludes` module and pass constants in as an array like in the example above.
 
 ## Compatibility
 

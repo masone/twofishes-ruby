@@ -5,6 +5,7 @@ module Twofishes
     # Geocodes a given string.
     #
     # @param [String] location
+    # @param [Array] list of additional ResponseIncludes constants
     # @return [Twofishes::Result]
     #
     # @example
