@@ -1,6 +1,6 @@
 require 'active_support/core_ext/string/inflections'
 
-module Camelized
+module Underscored
   def self.included(base)
     base::FIELDS.map { |_, v|
       define_method(v[:name].underscore) { send(v[:name]) }
@@ -9,9 +9,9 @@ module Camelized
 end
 
 class GeocodeInterpretation
-  include Camelized
+  include Underscored
 end
 
 class GeocodeFeature
-  include Camelized
+  include Underscored
 end
