@@ -39,7 +39,12 @@ module Twofishes
     end
 
     def self.thrift_client
-      @@thrift_client ||= ThriftClient.new(Geocoder::Client, Twofishes.configuration.address, retries: Twofishes.configuration.retries)
+      @@thrift_client ||= ThriftClient.new(
+        Geocoder::Client,
+        Twofishes.configuration.address,
+        retries: Twofishes.configuration.retries,
+        timeout: Twofishes.configuration.timeout
+      )
     end
 
     private

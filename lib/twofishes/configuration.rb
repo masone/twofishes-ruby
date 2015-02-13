@@ -2,11 +2,17 @@ module Twofishes
   class Configuration
     # @see https://github.com/thoughtbot/clearance/blob/master/lib/clearance/configuration.rb
 
-    attr_accessor :address, :retries
+    attr_accessor :host, :port, :timeout, :retries
 
     def initialize
-      @address = '127.0.0.1:8080'
+      @host = '127.0.0.1'
+      @port = 8080
+      @timeout = 3
       @retries = 2
+    end
+
+    def address
+      "#{host}:#{port}"
     end
   end
 

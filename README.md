@@ -20,7 +20,9 @@ Or install it yourself as:
 ## Configuration
 
     Twofishes.configure do |config|
-      config.address = '127.0.0.1:8080'
+      config.host = '127.0.0.1'
+      config.port = 8080
+      config.timeout = 3
       config.retries = 2
     end
 

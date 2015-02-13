@@ -21,7 +21,8 @@ describe Twofishes::Configuration do
 
   it 'should reset configuration' do
     Twofishes.configure do |config|
-      config.address = '127.0.0.1:9090'
+      config.host = '127.0.0.1'
+      config.port = 9090
     end
     Twofishes.reset_configuration
 
@@ -30,7 +31,8 @@ describe Twofishes::Configuration do
 
   it 'should configure address' do
     Twofishes.configure do |config|
-      config.address = '127.0.0.1:9090'
+      config.host = '127.0.0.1'
+      config.port = 9090
     end
 
     assert_equal '127.0.0.1:9090', configuration.address
