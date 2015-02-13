@@ -10,9 +10,9 @@ module Twofishes
     # @example
     #   Twofishes::Client.geocode('Zurich, Switzerland')
     #
-    def self.geocode(location)
+    def self.geocode(location, response_includes = [])
       handle_response do
-        thrift_client.geocode(GeocodeRequest.new(query: location))
+        thrift_client.geocode(GeocodeRequest.new(query: location, responseIncludes: response_includes))
       end
     end
 
