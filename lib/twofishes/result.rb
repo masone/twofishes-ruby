@@ -6,10 +6,6 @@ module Twofishes
         new(interpretation)
       }
     end
-
-    def initialize(interpretation)
-      super
-    end
   end
 end
 
