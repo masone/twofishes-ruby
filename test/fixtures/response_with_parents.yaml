@@ -1,0 +1,286 @@
+--- !ruby/object:GeocodeResponse
+interpretations:
+- !ruby/object:GeocodeInterpretation
+  what: ''
+  where: zurich
+  feature: !ruby/object:GeocodeFeature
+    woeType: 7
+    cc: CH
+    geometry: !ruby/object:FeatureGeometry
+      center: !ruby/object:GeocodePoint
+        lat: 47.36667
+        lng: 8.55
+      bounds: !ruby/object:GeocodeBoundingBox
+        ne: !ruby/object:GeocodePoint
+          lat: 47.47401949999994
+          lng: 8.63605549999994
+        sw: !ruby/object:GeocodePoint
+          lat: 47.27143099999995
+          lng: 8.380589499999815
+      source: qs
+    name: Zürich
+    displayName: Zürich, Switzerland
+    ids:
+    - !ruby/object:FeatureId
+      source: geonameid
+      id: '2657896'
+    - !ruby/object:FeatureId
+      source: woeid
+      id: '12682746'
+    - !ruby/object:FeatureId
+      source: woeid
+      id: '784794'
+    names:
+    - !ruby/object:FeatureName
+      flags:
+      - 4
+      name: Zurich
+      lang: en
+    - !ruby/object:FeatureName
+      flags: []
+      name: Zürich
+      lang: en
+    highlightedName: "<b>Zurich</b>, Switzerland"
+    matchedName: Zurich, Switzerland
+    id: geonameid:2657896
+    attributes: !ruby/object:GeocodeFeatureAttributes
+      adm0cap: false
+      adm1cap: true
+      scalerank: 2
+      labelrank: 7
+      natscale: 200
+      population: 341730
+      sociallyRelevant: false
+      worldcity: false
+    longId: 72057594040585832
+    longIds:
+    - 72057594040585831
+    parentIds:
+    - 72057594040586370
+    - 72057594040585831
+    - 72057594044386734
+    - 72057594045215586
+  parents:
+  - !ruby/object:GeocodeFeature
+    woeType: 10
+    cc: CH
+    geometry: !ruby/object:FeatureGeometry
+      center: !ruby/object:GeocodePoint
+        lat: 47.38283
+        lng: 8.53071
+      bounds: !ruby/object:GeocodeBoundingBox
+        ne: !ruby/object:GeocodePoint
+          lat: 47.4013137817
+          lng: 8.54856395721
+        sw: !ruby/object:GeocodePoint
+          lat: 47.3555717468
+          lng: 8.50832080841
+    name: Zurich
+    displayName: Zurich, Switzerland
+    ids:
+    - !ruby/object:FeatureId
+      source: geonameid
+      id: '7287650'
+    names:
+    - !ruby/object:FeatureName
+      flags:
+      - 4
+      name: Zuerich
+      lang: en
+    - !ruby/object:FeatureName
+      flags:
+      - 4
+      - 1
+      name: Zurich
+      lang: en
+    - !ruby/object:FeatureName
+      flags: []
+      name: Zürich
+      lang: en
+    id: geonameid:7287650
+    attributes: !ruby/object:GeocodeFeatureAttributes
+      adm0cap: false
+      adm1cap: false
+      scalerank: 20
+      labelrank: 0
+      natscale: 0
+      population: 380777
+      sociallyRelevant: false
+      worldcity: false
+    longId: 72057594045215586
+    parentIds:
+    - 72057594040586370
+    - 72057594040585831
+    - 72057594044386734
+  - !ruby/object:GeocodeFeature
+    woeType: 9
+    cc: CH
+    geometry: !ruby/object:FeatureGeometry
+      center: !ruby/object:GeocodePoint
+        lat: 47.3711
+        lng: 8.54323
+      bounds: !ruby/object:GeocodeBoundingBox
+        ne: !ruby/object:GeocodePoint
+          lat: 47.4762573242
+          lng: 8.65256977081
+        sw: !ruby/object:GeocodePoint
+          lat: 47.2704658508
+          lng: 8.44349956512
+    name: Bezirk Zürich
+    displayName: Bezirk Zürich, Switzerland
+    ids:
+    - !ruby/object:FeatureId
+      source: geonameid
+      id: '6458798'
+    - !ruby/object:FeatureId
+      source: woeid
+      id: '12593130'
+    names:
+    - !ruby/object:FeatureName
+      flags:
+      - 4
+      name: Bezirk Zuerich
+      lang: en
+    - !ruby/object:FeatureName
+      flags:
+      - 4
+      - 1
+      name: Bezirk Zurich
+      lang: en
+    - !ruby/object:FeatureName
+      flags:
+      - 1
+      name: Bezirk Zürich
+      lang: en
+    id: geonameid:6458798
+    attributes: !ruby/object:GeocodeFeatureAttributes
+      adm0cap: false
+      adm1cap: false
+      scalerank: 20
+      labelrank: 0
+      natscale: 0
+      population: 380777
+      sociallyRelevant: false
+      worldcity: false
+    longId: 72057594044386734
+    parentIds:
+    - 72057594040586370
+    - 72057594040585831
+  - !ruby/object:GeocodeFeature
+    woeType: 8
+    cc: CH
+    geometry: !ruby/object:FeatureGeometry
+      center: !ruby/object:GeocodePoint
+        lat: 47.41667
+        lng: 8.66667
+      bounds: !ruby/object:GeocodeBoundingBox
+        ne: !ruby/object:GeocodePoint
+          lat: 47.7111091614
+          lng: 8.9723110199
+        sw: !ruby/object:GeocodePoint
+          lat: 47.1419944763
+          lng: 8.36419963837
+    name: Zurich
+    displayName: Zurich, Switzerland
+    ids:
+    - !ruby/object:FeatureId
+      source: geonameid
+      id: '2657895'
+    - !ruby/object:FeatureId
+      source: woeid
+      id: '2347107'
+    names:
+    - !ruby/object:FeatureName
+      flags:
+      - 4
+      name: Kanton Zurich
+      lang: en
+    - !ruby/object:FeatureName
+      flags:
+      - 1
+      name: Canton of Zurich
+      lang: en
+    - !ruby/object:FeatureName
+      flags:
+      - 128
+      name: Zurich
+      lang: en
+    - !ruby/object:FeatureName
+      flags:
+      - 8
+      - 1
+      name: of Zurich
+      lang: en
+    - !ruby/object:FeatureName
+      flags:
+      - 2
+      - 1
+      name: ZH
+      lang: abbr
+    - !ruby/object:FeatureName
+      flags: []
+      name: Kanton Zürich
+      lang: en
+    id: geonameid:2657895
+    attributes: !ruby/object:GeocodeFeatureAttributes
+      adm0cap: false
+      adm1cap: false
+      scalerank: 20
+      labelrank: 0
+      natscale: 0
+      population: 1289559
+      sociallyRelevant: false
+      worldcity: false
+    longId: 72057594040585831
+    parentIds:
+    - 72057594040586370
+  - !ruby/object:GeocodeFeature
+    woeType: 12
+    cc: CH
+    geometry: !ruby/object:FeatureGeometry
+      center: !ruby/object:GeocodePoint
+        lat: 47.00016
+        lng: 8.01427
+      bounds: !ruby/object:GeocodeBoundingBox
+        ne: !ruby/object:GeocodePoint
+          lat: 47.809357
+          lng: 10.490936
+        sw: !ruby/object:GeocodePoint
+          lat: 45.818852
+          lng: 5.95538
+      source: gn-adm0-new3.json
+    name: Switzerland
+    displayName: Switzerland
+    ids:
+    - !ruby/object:FeatureId
+      source: geonameid
+      id: '2658434'
+    names:
+    - !ruby/object:FeatureName
+      flags: []
+      name: Swiss Confederation
+      lang: en
+    - !ruby/object:FeatureName
+      flags:
+      - 64
+      - 1
+      name: Switzerland
+      lang: en
+    - !ruby/object:FeatureName
+      flags:
+      - 2
+      name: CH
+      lang: abbr
+    id: geonameid:2658434
+    attributes: !ruby/object:GeocodeFeatureAttributes
+      adm0cap: false
+      adm1cap: false
+      scalerank: 20
+      labelrank: 0
+      natscale: 0
+      population: 7581000
+      sociallyRelevant: false
+      worldcity: false
+    longId: 72057594040586370
+    parentIds:
+    - 72057594044183084

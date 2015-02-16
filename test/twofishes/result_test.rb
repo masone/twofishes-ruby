@@ -1,7 +1,7 @@
 require 'test_helper'
 
 describe Twofishes::Result do
-  let(:response) { YAML::load_file('test/fixtures/zurich.yaml') }
+  let(:response) { YAML::load_file('test/fixtures/response.yaml') }
   let(:results) { Twofishes::Result.from_response(response) }
   let(:result) { results.first }
 

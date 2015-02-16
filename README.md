@@ -46,7 +46,7 @@ Use the following methods to geocode / reverse geocode.
 
 ```ruby
 Twofishes::Client.geocode('Ljubljana')
-Twofishes::Client.geocode('Zurich', [ResponseIncludes::PARENTS])
+Twofishes::Client.geocode('Zurich', includes: [ResponseIncludes::PARENTS])
 Twofishes::Client.reverse_geocode([0, 0])
 ```
 
