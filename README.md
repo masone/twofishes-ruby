@@ -1,5 +1,9 @@
-Twofishes [![Build Status](https://travis-ci.org/masone/twofishes-ruby.svg?branch=master)](https://travis-ci.org/masone/twofishes-ruby) [![Code Climate](https://codeclimate.com/repos/539493ee69568044cb013dde/badges/385f7d64548a83e99792/gpa.png)](https://codeclimate.com/repos/539493ee69568044cb013dde/feed) [![Dependency Status](https://gemnasium.com/masone/twofishes-ruby.svg)](https://gemnasium.com/masone/twofishes-ruby)
-========
+# Twofishes
+
+[![Build Status](https://img.shields.io/travis/masone/twofishes-ruby.svg?style=flat)](https://travis-ci.org/masone/twofishes-ruby)
+[![Code Climate](https://img.shields.io/codeclimate/github/masone/twofishes-ruby.svg?style=flat)](https://codeclimate.com/github/masone/twofishes-ruby)
+[![Dependency Status](https://img.shields.io/gemnasium/masone/twofishes-ruby.svg?style=flat)](https://gemnasium.com/masone/twofishes-ruby)
+[![Gem Version](https://img.shields.io/gem/v/twofishes.svg?style=flat)](https://rubygems.org/gems/twofishes)
 
 A client/wrapper for foursquare's sparse geocoding / reverse geocoding server Twofishes (https://github.com/foursquare/twofishes).
 
@@ -7,34 +11,46 @@ A client/wrapper for foursquare's sparse geocoding / reverse geocoding server Tw
 
 Add this line to your application's Gemfile:
 
-    gem 'twofishes'
+```ruby
+gem 'twofishes'
+```
 
 And then execute:
 
-    $ bundle
+```sh
+$ bundle
+```
 
 Or install it yourself as:
 
-    $ gem install twofishes
+```sh
+$ gem install twofishes
+```
 
 ## Configuration
 
-    Twofishes.configure do |config|
-      config.host = '127.0.0.1'
-      config.port = 8080
-      config.timeout = 3
-      config.retries = 2
-    end
+```ruby
+Twofishes.configure do |config|
+  config.host = '127.0.0.1' # server address
+  config.port = 8080 # thrift port
+  config.timeout = 3 # timeout in seconds
+  config.retries = 2 # how many times to retry a request
+end
+```
+
+Timeouts are enforced per-try, so if you have a timeout of n and do m retries, the total time it could take is n*m.
 
 ## Usage
 
 Use the following methods to geocode / reverse geocode.
 
-    Twofishes::Client.geocode('ljubljana')
-    Twofishes::Client.geocode('zurich', [ResponseIncludes::PARENTS])
-    Twofishes::Client.reverse_geocode([0, 0])
+```ruby
+Twofishes::Client.geocode('Ljubljana')
+Twofishes::Client.geocode('Zurich', [ResponseIncludes::PARENTS])
+Twofishes::Client.reverse_geocode([0, 0])
+```
 
-If you want `.geocode` to return more fields look at `ResponseIncludes` module and pass constants in as an array like in the example above.
+If you want `.geocode` to return more fields look at `ResponseIncludes` module and pass constants in as an array like in the Zurich example above.
 
 ## Compatibility
 
@@ -42,10 +58,11 @@ Ruby 2+
 
 ## Generating thrift files
 
+```sh
+$ thrift --gen rb -o /path/to/lib /path/to/twofishes-master/interface/src/main/thrift/geocoder.thrift
 ```
-❯ thrift --gen rb -o /path/to/lib /path/to/twofishes-master/interface/src/main/thrift/geocoder.thrift
-```
-Then move out of `gen-rb` folder to `twofishes` folder and remove `require`s.
+
+Then move out of `gen-rb` folder to `twofishes` folder and remove `require` statements.
 
 ## Contributing
 
