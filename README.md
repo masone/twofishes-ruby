@@ -46,23 +46,18 @@ Use the following methods to geocode / reverse geocode.
 
 ```ruby
 Twofishes::Client.geocode('Ljubljana')
-Twofishes::Client.geocode('Zurich', includes: [ResponseIncludes::PARENTS])
 Twofishes::Client.reverse_geocode([0, 0])
 ```
+                                      
+If you want the Twofishes server to return fields that are not included by default, you can pass `geocode` an Array of `ResponseIncludes` constants, illustrated by the example below.
 
-If you want `.geocode` to return more fields look at `ResponseIncludes` module and pass constants in as an array like in the Zurich example above.
+```ruby                                      
+Twofishes::Client.geocode('Zurich', includes: [ResponseIncludes::PARENTS])
+```
 
 ## Compatibility
 
 Ruby 2+
-
-## Generating thrift files
-
-```sh
-$ thrift --gen rb -o /path/to/lib /path/to/twofishes-master/interface/src/main/thrift/geocoder.thrift
-```
-
-Then rename `gen-rb` folder to `thrift` folder and remove `require` statements from files.
 
 ## Contributing
 

@@ -1,23 +1,23 @@
 # Change Log
-All notable changes to this project will be documented in this file.
-This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [2.0.0-pre][unreleased]
+## 2.0.0.pre (2015-02-17)
 
-- Now uses thrift instead of REST. #4 [mrfoto, barthez]
-- Up to [60% faster](https://github.com/masone/twofishes-ruby/pull/4#issuecomment-74030852).
-- `Twofishes.configure` now accepts `host` and `port` respectively. Be aware you need to provide thrift port (8080 by default), not http server port (8081 by default).
-- The response no longer includes `parents` by default. You can easily get them by passing `[ResponseIncludes::PARENTS]` as the `:includes` keyword argument to `geocode`. Look at the README for an example.
+- Now uses thrift instead of REST which is up to [60% faster](https://github.com/masone/twofishes-ruby/pull/4#issuecomment-74030852). [mrfoto, barthez]
+                   
+### Breaking changes :warning:
 
-## [1.0.1] - 2014-12-08
+- `Twofishes.configure` no longer accepts `base_url`. You now need to provide `host` and `port` separately. Please make sure that you're using the thrift port (8080 by default), not the HTTP port (8081 by default) anymore.
+- Thrift does not include all available fields in the response by default. To get them, you can explicitly pass `geocode` an `includes` keyword argument with an array of Array of `ResponseIncludes` constants. There is an example in the README.
 
-- Adds timeout option, configurable with `Twofishes.configure`
+## 1.0.1 (2014-12-08)
 
-## [1.0.0] - 2014-07-30
+- Adds timeout option, configurable with `Twofishes.configure`.
+
+## 1.0.0 (2014-07-30)
 
 - Initial stable version.
 - Structural improvements, best practices.
 
-## [1.0.0.pre] - 2014-06-30
+## 1.0.0.pre (2014-06-30)
 
 - Development version, subject to changes.
