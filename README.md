@@ -62,7 +62,7 @@ Ruby 2+
 $ thrift --gen rb -o /path/to/lib /path/to/twofishes-master/interface/src/main/thrift/geocoder.thrift
 ```
 
-Then move out of `gen-rb` folder to `twofishes` folder and remove `require` statements.
+Then rename `gen-rb` folder to `thrift` folder and remove `require` statements from files.
 
 ## Contributing
 
