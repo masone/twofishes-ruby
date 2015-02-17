@@ -1,56 +1,32 @@
-require 'rash'
-
+require 'delegate'
 module Twofishes
-
-  class Result
-
-    def initialize(hash)
-      @data = Hashie::Rash.new(hash)
+  class Result < SimpleDelegator
+    def self.from_response(response)
+      response.interpretations.map { |interpretation|
+        new(interpretation)
+      }
     end
+  end
+end
 
-    def self.from_response(hash)
-      if hash['interpretations']
-        hash['interpretations'].map { |interpretation| self.new(interpretation) }
-      else
-        []
-      end
-    end
+require 'forwardable'
+class GeocodeInterpretation
+  extend Forwardable
+  def_delegators :feature, *GeocodeFeature::FIELDS.map { |_, v| v[:name] }
 
-    def name
-      feature.name
-    end
+  def country_code
+    cc
+  end
 
-    def display_name
-      feature.display_name
-    end
+  def lat
+    geometry.center.lat
+  end
 
-    def country_code
-      feature.cc
-    end
+  def lng
+    geometry.center.lng
+  end
 
-    def lat
-      feature.geometry.center.lat
-    end
-
-    def lng
-      feature.geometry.center.lng
-    end
-
-    def coordinates
-      [lat, lng]
-    end
-
-    def parents
-      @data.parents.map { |parent| Twofishes::Result.new(parent) }
-    end
-
-    def method_missing(method_sym, *arguments, &block)
-      @data.send(method_sym)
-    end
-
-    def respond_to?(method_sym, include_private=false)
-      @data.respond_to?(method_sym) ? true : super
-    end
-
+  def coordinates
+    [lat, lng]
   end
 end

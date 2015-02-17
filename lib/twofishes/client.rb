@@ -1,53 +1,53 @@
-require 'httparty'
-
 module Twofishes
   class Client
     # @see https://github.com/foursquare/twofishes/blob/master/docs/twofishes_requests.md
 
-    include HTTParty
-    # debug_output $stderr # httparty debugging
-
     # Geocodes a given string.
     #
-    # @param [String] query
+    # @param [String] location
+    # @param [Array] list of additional ResponseIncludes constants
     # @return [Twofishes::Result]
     #
     # @example
-    #     Twofishes::Client.geocode('Zurich, Switzerland')
+    #   Twofishes::Client.geocode('Zurich, Switzerland')
     #
-    def self.geocode(location)
-      call_api(query: location)
+    def self.geocode(location, includes: [])
+      handle_response do
+        request = GeocodeRequest.new(query: location, responseIncludes: includes)
+        thrift_client.geocode(request)
+      end
     end
 
     # Reverse geocodes lat/lng.
     #
-    # @param [Float] lat
-    # @param [Float] lng
+    # @param [Array] latitude, longitude pair
     # @return [Twofishes::Result]
-    #
     # @example
-    #     Twofishes::Client.reverse_geocode(47.3787733, 8.5273363)
+    #   Twofishes::Client.reverse_geocode([47.3787733, 8.5273363])
     #
-    def self.reverse_geocode(coordinates)
-      call_api(ll: coordinates.join(','))
+    def self.reverse_geocode(coordinates, includes: [])
+      handle_response do
+        point = GeocodePoint.new(lat: coordinates[0], lng: coordinates[1])
+        request = GeocodeRequest.new(ll: point, responseIncludes: includes)
+        thrift_client.reverseGeocode(request)
+      end
     end
 
-    def self.call_api(params)
-      handle_response do
-        get(Twofishes.configuration.base_url, query: params, timeout: Twofishes.configuration.timeout)
-      end
+    def self.thrift_client
+      @thrift_client ||= ThriftClient.new(
+        Geocoder::Client,
+        Twofishes.configuration.address,
+        retries: Twofishes.configuration.retries,
+        timeout: Twofishes.configuration.timeout
+      )
     end
 
     private
 
     def self.handle_response
-      response = yield
-      if response.code == 200
-        Result.from_response(response)
-      else
-        raise Twofishes::InvalidResponseError, response.to_s.lines.first
-      end
+      Result.from_response(yield)
+    rescue => e
+      raise Twofishes::InvalidResponseError, e.message
     end
-
   end
 end

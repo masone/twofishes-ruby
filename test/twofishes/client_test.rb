@@ -1,27 +1,24 @@
 require 'test_helper'
 
-describe Twofishes::Client do
+module Twofishes
+  describe Client do
+    let(:response) { YAML::load_file('test/fixtures/response.yaml') }
+    let(:response_with_parents) { YAML::load_file('test/fixtures/response_with_parents.yaml') }
 
-  it "should geocode" do
-    FakeWeb.register_uri(:get, 'http://localhost:8081/?query=zurich', :status => 200, :body => '{}')
-    Twofishes::Client.geocode('zurich')
-  end
+    it 'should geocode' do
+      Twofishes::Client.thrift_client.stubs(:geocode).returns(response)
+      assert Twofishes::Client.geocode('Zurich').first.is_a? Result
+    end
 
-  it "should reverse geocode" do
-    FakeWeb.register_uri(:get, 'http://localhost:8081/?ll=0%2C0', :status => 200, :body => '{}')
-    Twofishes::Client.reverse_geocode([0, 0])
-  end
+    it 'should accept includes keyword argument' do
+      Twofishes::Client.thrift_client.stubs(:geocode).returns(response_with_parents)
+      result = Twofishes::Client.geocode('Zurich', includes: [ResponseIncludes::PARENTS]).first
+      assert result.parents
+    end
 
-  it "should call api" do
-    FakeWeb.register_uri(:get, 'http://localhost:8081/?query=zurich', :status => 200, :body => '{}')
-    Twofishes::Client.call_api({query: 'zurich'})
-  end
-
-  it "should raise an error" do
-    FakeWeb.register_uri(:get, 'http://localhost:8081', :status => 500, :body => 'java.lang.NumberFormatException: For input string: ""')
-    assert_raises Twofishes::InvalidResponseError do
-      Twofishes::Client.call_api({})
+    it 'should reverse geocode' do
+      Twofishes::Client.thrift_client.stubs(:reverseGeocode).returns(response)
+      Twofishes::Client.reverse_geocode([0, 0]).first.is_a? Result
     end
   end
-
 end
