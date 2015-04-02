@@ -1,6 +1,6 @@
 # Change Log
 
-## 2.0.0.rc1 (2015-02-19)
+## 2.0.0 (2015-04-02)
 
 - Now uses thrift instead of REST which is up to [60% faster](https://github.com/masone/twofishes-ruby/pull/4#issuecomment-74030852). [mrfoto, barthez]
                    
@@ -17,7 +17,3 @@
 
 - Initial stable version.
 - Structural improvements, best practices.
-
-## 1.0.0.pre (2014-06-30)
-
-- Development version, subject to changes.
