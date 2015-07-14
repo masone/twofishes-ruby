@@ -1,5 +1,5 @@
 require 'test_helper'
-require 'pry'
+
 module Twofishes
   class Zurich
     def self.geocode(location)
