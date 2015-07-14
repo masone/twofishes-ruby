@@ -19,6 +19,10 @@ describe Twofishes::Configuration do
     assert_equal 2, configuration.retries
   end
 
+  it 'should return default connect_timeout' do
+    assert_equal 0.5, configuration.connect_timeout
+  end
+
   it 'should reset configuration' do
     Twofishes.configure do |config|
       config.host = '127.0.0.1'
@@ -38,4 +42,14 @@ describe Twofishes::Configuration do
     assert_equal '127.0.0.1:9090', configuration.address
     Twofishes.reset_configuration
   end
+
+  it 'should configure connect_timeout' do
+    Twofishes.configure do |config|
+      config.connect_timeout = 0.9
+    end
+
+    assert_equal 0.9, configuration.connect_timeout
+    Twofishes.reset_configuration
+  end
+
 end

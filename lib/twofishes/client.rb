@@ -38,7 +38,8 @@ module Twofishes
         Geocoder::Client,
         Twofishes.configuration.address,
         retries: Twofishes.configuration.retries,
-        timeout: Twofishes.configuration.timeout
+        timeout: Twofishes.configuration.timeout,
+        connect_timeout: Twofishes.configuration.connect_timeout
       )
     end
 
