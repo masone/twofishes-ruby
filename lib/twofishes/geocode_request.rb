@@ -17,7 +17,7 @@ module Twofishes
       when Array
         GeocodePoint.new(lat: ll[0].to_f, lng: ll[1].to_f)
       when Hash
-        GeocodePoint.new(lat: (ll[:lat] || ll['lat']).to_f, lng: (ll[:lng] || ll['lng'] || ll[:lon] || ll['lon']).to_f)
+        GeocodePoint.new(lat: ll[:lat].to_f, lng: ll[:lng].to_f)
       else
         ll
       end
@@ -35,8 +35,8 @@ module Twofishes
         sw = GeocodePoint.new(lat: bounds[2].to_f, lng: bounds[3].to_f)
         GeocodeBoundingBox.new(ne: ne, sw: sw)
       when Hash
-        ne = GeocodePoint.new(lat: (bounds[:ne_lat] || bounds['ne_lat']).to_f, lng: (bounds[:ne_lng] || bounds['ne_lng'] || bounds[:ne_lon] || bounds['ne_lon']).to_f)
-        sw = GeocodePoint.new(lat: (bounds[:sw_lat] || bounds['sw_lat']).to_f, lng: (bounds[:sw_lng] || bounds['sw_lng'] || bounds[:sw_lon] || bounds['sw_lon']).to_f)
+        ne = GeocodePoint.new(lat: bounds[:ne_lat].to_f, lng: bounds[:ne_lng].to_f)
+        sw = GeocodePoint.new(lat: bounds[:sw_lat].to_f, lng: bounds[:sw_lng].to_f)
         GeocodeBoundingBox.new(ne: ne, sw: sw)
       else
         bounds
@@ -51,6 +51,9 @@ module Twofishes
       options[:woeHint] = options.delete(:woe_hint)
       options[:woeRestrict] = options.delete(:woe_restrict)
       options[:autocompleteBias] = options.delete(:bias) || options.delete(:autocomplete_bias)
+      options[:ll][:lng] = options[:ll][:lon] if options[:ll] and options[:ll][:lon]
+      options[:bounds][:ne_lng] = options[:bounds][:ne_lon] if options[:bounds] and options[:bounds][:ne_lon]
+      options[:bounds][:sw_lng] = options[:bounds][:sw_lon] if options[:bounds] and options[:bounds][:sw_lon]
       options
     end
   end
