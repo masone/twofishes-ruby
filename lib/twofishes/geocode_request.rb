@@ -1,10 +1,10 @@
 module Twofishes
   class GeocodeRequest < ::GeocodeRequest
     def initialize(options = {})
+      options = substitute_aliases(options)
+
       options[:ll] = prepare_ll(options[:ll])
       options[:bounds] = prepare_bounds(options[:bounds])
-
-      options = substitute_aliases(options)
 
       super(options)
     end
@@ -44,16 +44,24 @@ module Twofishes
     end
 
     def substitute_aliases(options)
+      options = options.dup
+
       options[:maxInterpretations] ||= options.delete(:max_interpretations) || options.delete(:max)
       options[:allowedSources] ||= options.delete(:allowed_sources) || options.delete(:sources)
       options[:responseIncludes] ||= options.delete(:response_includes) || options.delete(:includes)
       options[:woeHint] ||= options.delete(:woe_hint)
       options[:woeRestrict] ||= options.delete(:woe_restrict)
       options[:autocompleteBias] ||= options.delete(:autocomplete_bias) || options.delete(:bias)
-      
-      options[:ll][:lng] = options[:ll][:lon] if options[:ll] and options[:ll][:lon]
-      options[:bounds][:ne_lng] = options[:bounds][:ne_lon] if options[:bounds] and options[:bounds][:ne_lon]
-      options[:bounds][:sw_lng] = options[:bounds][:sw_lon] if options[:bounds] and options[:bounds][:sw_lon]
+
+      if options[:ll].kind_of? Hash
+        options[:ll][:lng] = options[:ll][:lon] if options[:ll][:lon]
+      end
+
+      if options[:bounds].kind_of? Hash
+        options[:bounds][:ne_lng] = options[:bounds][:ne_lon] if options[:bounds] and options[:bounds][:ne_lon]
+        options[:bounds][:sw_lng] = options[:bounds][:sw_lon] if options[:bounds] and options[:bounds][:sw_lon]
+      end
+
       options
     end
   end

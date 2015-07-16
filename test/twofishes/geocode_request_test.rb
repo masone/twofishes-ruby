@@ -55,6 +55,12 @@ describe Twofishes::GeocodeRequest do
     assert_equal -74.0, request.ll.lng
   end
 
+  it 'should accept an ll argument that is a hash with "lon"' do
+    request = Twofishes::GeocodeRequest.new(ll: {lon: -74.0, lat: 40.74})
+    assert_equal 40.74, request.ll.lat
+    assert_equal -74.0, request.ll.lng
+  end
+
   it 'should accept a bounds argument' do
     request = Twofishes::GeocodeRequest.new(bounds: GeocodeBoundingBox.new(ne: GeocodePoint.new(lat: 40.74, lng: -74.0), sw: GeocodePoint.new(lat: 40.70, lng: -73.9)))
     assert_equal 40.74, request.bounds.ne.lat
