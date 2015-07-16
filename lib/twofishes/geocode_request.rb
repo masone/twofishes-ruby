@@ -44,13 +44,13 @@ module Twofishes
     end
 
     def substitute_aliases(options)
-      options[:maxInterpretations] = options.delete(:max) || options.delete(:max_interpretations)
-      options[:allowedSources] = options.delete(:sources) || options.delete(:allowed_sources)
-      options[:allowedSources] = options.delete(:allowed_sources)
-      options[:responseIncludes] = options.delete(:includes) || options.delete(:response_includes)
-      options[:woeHint] = options.delete(:woe_hint)
-      options[:woeRestrict] = options.delete(:woe_restrict)
-      options[:autocompleteBias] = options.delete(:bias) || options.delete(:autocomplete_bias)
+      options[:maxInterpretations] ||= options.delete(:max_interpretations) || options.delete(:max)
+      options[:allowedSources] ||= options.delete(:allowed_sources) || options.delete(:sources)
+      options[:responseIncludes] ||= options.delete(:response_includes) || options.delete(:includes)
+      options[:woeHint] ||= options.delete(:woe_hint)
+      options[:woeRestrict] ||= options.delete(:woe_restrict)
+      options[:autocompleteBias] ||= options.delete(:autocomplete_bias) || options.delete(:bias)
+      
       options[:ll][:lng] = options[:ll][:lon] if options[:ll] and options[:ll][:lon]
       options[:bounds][:ne_lng] = options[:bounds][:ne_lon] if options[:bounds] and options[:bounds][:ne_lon]
       options[:bounds][:sw_lng] = options[:bounds][:sw_lon] if options[:bounds] and options[:bounds][:sw_lon]
