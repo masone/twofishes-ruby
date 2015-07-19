@@ -11,9 +11,11 @@ module Twofishes
     # @example
     #   Twofishes::Client.geocode('Zurich, Switzerland')
     #
-    def self.geocode(location, includes: [])
+
+    def self.geocode(location, options = {})
       handle_response do
-        request = GeocodeRequest.new(query: location, responseIncludes: includes)
+        options[:query] = location
+        request = Twofishes::GeocodeRequest.new(options)
         thrift_client.geocode(request)
       end
     end
@@ -25,10 +27,10 @@ module Twofishes
     # @example
     #   Twofishes::Client.reverse_geocode([47.3787733, 8.5273363])
     #
-    def self.reverse_geocode(coordinates, includes: [])
+    def self.reverse_geocode(coordinates, options = {})
       handle_response do
-        point = GeocodePoint.new(lat: coordinates[0], lng: coordinates[1])
-        request = GeocodeRequest.new(ll: point, responseIncludes: includes)
+        options[:ll] = coordinates
+        request = Twofishes::GeocodeRequest.new(options)
         thrift_client.reverseGeocode(request)
       end
     end
