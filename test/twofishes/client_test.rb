@@ -1,83 +1,84 @@
 require 'test_helper'
 
 module Twofishes
-  class Zurich
-    def self.geocode(location)
-      if location.responseIncludes == [ResponseIncludes::PARENTS]
-        response = YAML.load_file('test/fixtures/response_with_parents.yaml')
-      else
-        response = YAML.load_file('test/fixtures/response.yaml')
-      end
-
-      if location.query
-        response.interpretations.first.feature.name = location.query
-      end
-
-      if location.ll
-        response.interpretations.first.feature.geometry.center.lat = location.ll.lat
-        response.interpretations.first.feature.geometry.center.lng = location.ll.lng
-      end
-      response
-    end
-
-    def self.reverseGeocode(location)
-      if location.responseIncludes == [ResponseIncludes::PARENTS]
-        response = YAML.load_file('test/fixtures/response_with_parents.yaml')
-      else
-        response = YAML.load_file('test/fixtures/response.yaml')
-      end
-
-      if location.ll
-        response.interpretations.first.feature.geometry.center.lat = location.ll.lat
-        response.interpretations.first.feature.geometry.center.lng = location.ll.lng
-      end
-      response
-    end
-  end
-
   describe Client do
-    it 'should geocode' do
-      Twofishes::Client.expects(:thrift_client).returns(Zurich)
-      response = Twofishes::Client.geocode('Zurich').first
+    let(:geocode_response_with_parents) { YAML.load_file('test/fixtures/response_with_parents.yaml') }
+    let(:geocode_response) { YAML.load_file('test/fixtures/response.yaml') }
 
-      assert response.is_a? Result
-      assert_equal 'Zurich', response.feature.name
-      assert_equal nil, response.parents
-    end
+    describe 'geocode' do
+      it 'should return a valid result' do
+        mock_geocode(geocode_response)
+        response = Twofishes::Client.geocode('Zurich').first
 
-    it 'should geocode with parameters' do
-      Twofishes::Client.expects(:thrift_client).returns(Zurich)
-      response = Twofishes::Client.geocode('Caracas', ll: '40.74,-74', includes: [ResponseIncludes::PARENTS]).first
+        assert response.is_a? Result
+      end
 
-      assert response.is_a? Result
-      assert_equal 'Caracas', response.feature.name
-      assert_equal 40.74, response.feature.geometry.center.lat
-      assert_equal 4, response.parents.size
-    end
+      it 'should return fields' do
+        mock_geocode(geocode_response)
+        response = Twofishes::Client.geocode('Zurich').first
 
-    it 'should not geocode with unexpected parameters' do
-      assert_raises Twofishes::InvalidResponseError do
-        Twofishes::Client.geocode('Caracas', keywords: 'sushi').first
+        assert_equal 'Zürich', response.feature.name
+        assert_equal 47.36667, response.feature.geometry.center.lat
+        assert_equal nil, response.parents
+      end
+
+      it 'should return parents when requested' do
+        mock_geocode(geocode_response_with_parents)
+        response = Twofishes::Client.geocode('Zurich', includes: [ResponseIncludes::PARENTS]).first
+
+        assert_equal 4, response.parents.size
+      end
+
+      it 'should accept additional parameters' do
+        mock_geocode(geocode_response)
+        response = Twofishes::Client.geocode('Zurich', lang: 'fr').first
+
+        assert response.is_a? Result
+      end
+
+      it 'should not geocode with unexpected parameters' do
+        assert_raises Twofishes::InvalidResponseError do
+          Twofishes::Client.geocode('Zurich', keywords: 'sushi').first
+        end
       end
     end
 
-    it 'should reverse geocode' do
-      Twofishes::Client.expects(:thrift_client).returns(Zurich)
-      response = Twofishes::Client.reverse_geocode([0, 0]).first
+    describe 'reverse geocode' do
+      it 'should return a valid result' do
+        mock_reverse_geocode(geocode_response)
+        response = Twofishes::Client.reverse_geocode('Zurich').first
 
-      assert response.is_a? Result
-      assert_equal 'Zürich', response.feature.name
-      assert_equal 0, response.feature.geometry.center.lat
-    end
+        assert response.is_a? Result
+      end
 
-    it 'should reverse geocode with parameters' do
-      Twofishes::Client.expects(:thrift_client).returns(Zurich)
-      response = Twofishes::Client.reverse_geocode([0, 0], includes: [ResponseIncludes::PARENTS]).first
+      it 'should return fields' do
+        mock_reverse_geocode(geocode_response)
+        response = Twofishes::Client.reverse_geocode('Zurich').first
 
-      assert response.is_a? Result
-      assert_equal 'Zürich', response.feature.name
-      assert_equal 0, response.feature.geometry.center.lat
-      assert_equal 4, response.parents.size
+        assert_equal 'Zürich', response.feature.name
+        assert_equal 47.36667, response.feature.geometry.center.lat
+        assert_equal nil, response.parents
+      end
+
+      it 'should return parents when requested' do
+        mock_reverse_geocode(geocode_response_with_parents)
+        response = Twofishes::Client.reverse_geocode('Zurich', includes: [ResponseIncludes::PARENTS]).first
+
+        assert_equal 4, response.parents.size
+      end
+
+      it 'should accept additional parameters' do
+        mock_reverse_geocode(geocode_response)
+        response = Twofishes::Client.reverse_geocode('Zurich', lang: 'fr').first
+
+        assert response.is_a? Result
+      end
+
+      it 'should not geocode with unexpected parameters' do
+        assert_raises Twofishes::InvalidResponseError do
+          Twofishes::Client.reverse_geocode('Zurich', keywords: 'sushi').first
+        end
+      end
     end
   end
 end
