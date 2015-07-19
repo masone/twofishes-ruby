@@ -5,7 +5,7 @@ describe Twofishes::Configuration do
     Twofishes.reset_configuration
   end
 
-  let(:configuration){ Twofishes.configuration }
+  let(:configuration) { Twofishes.configuration }
 
   it 'should return configuration' do
     assert configuration.is_a? Twofishes::Configuration
@@ -51,5 +51,4 @@ describe Twofishes::Configuration do
     assert_equal 0.9, configuration.connect_timeout
     Twofishes.reset_configuration
   end
-
 end

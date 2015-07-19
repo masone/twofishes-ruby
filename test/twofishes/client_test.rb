@@ -4,9 +4,9 @@ module Twofishes
   class Zurich
     def self.geocode(location)
       if location.responseIncludes == [ResponseIncludes::PARENTS]
-        response = YAML::load_file('test/fixtures/response_with_parents.yaml')
+        response = YAML.load_file('test/fixtures/response_with_parents.yaml')
       else
-        response = YAML::load_file('test/fixtures/response.yaml')
+        response = YAML.load_file('test/fixtures/response.yaml')
       end
 
       if location.query
@@ -22,9 +22,9 @@ module Twofishes
 
     def self.reverseGeocode(location)
       if location.responseIncludes == [ResponseIncludes::PARENTS]
-        response = YAML::load_file('test/fixtures/response_with_parents.yaml')
+        response = YAML.load_file('test/fixtures/response_with_parents.yaml')
       else
-        response = YAML::load_file('test/fixtures/response.yaml')
+        response = YAML.load_file('test/fixtures/response.yaml')
       end
 
       if location.ll
@@ -41,23 +41,23 @@ module Twofishes
       response = Twofishes::Client.geocode('Zurich').first
 
       assert response.is_a? Result
-      assert_equal "Zurich", response.feature.name
+      assert_equal 'Zurich', response.feature.name
       assert_equal nil, response.parents
     end
 
     it 'should geocode with parameters' do
       Twofishes::Client.expects(:thrift_client).returns(Zurich)
-      response = Twofishes::Client.geocode('Caracas', ll: "40.74,-74", includes: [ResponseIncludes::PARENTS]).first
+      response = Twofishes::Client.geocode('Caracas', ll: '40.74,-74', includes: [ResponseIncludes::PARENTS]).first
 
       assert response.is_a? Result
-      assert_equal "Caracas", response.feature.name
+      assert_equal 'Caracas', response.feature.name
       assert_equal 40.74, response.feature.geometry.center.lat
       assert_equal 4, response.parents.size
     end
 
     it 'should not geocode with unexpected parameters' do
       assert_raises Twofishes::InvalidResponseError do
-        response = Twofishes::Client.geocode('Caracas', keywords: 'sushi').first
+        Twofishes::Client.geocode('Caracas', keywords: 'sushi').first
       end
     end
 
@@ -66,7 +66,7 @@ module Twofishes
       response = Twofishes::Client.reverse_geocode([0, 0]).first
 
       assert response.is_a? Result
-      assert_equal "Zürich", response.feature.name
+      assert_equal 'Zürich', response.feature.name
       assert_equal 0, response.feature.geometry.center.lat
     end
 
@@ -75,7 +75,7 @@ module Twofishes
       response = Twofishes::Client.reverse_geocode([0, 0], includes: [ResponseIncludes::PARENTS]).first
 
       assert response.is_a? Result
-      assert_equal "Zürich", response.feature.name
+      assert_equal 'Zürich', response.feature.name
       assert_equal 0, response.feature.geometry.center.lat
       assert_equal 4, response.parents.size
     end

@@ -38,7 +38,7 @@ module Twofishes
     end
 
     def substitute_aliases(options)
-      options = Hash[options.map{|k,v| [k.to_s.camelize(:lower).to_sym,v] } ]
+      options = Hash[options.map { |k, v| [k.to_s.camelize(:lower).to_sym, v] }]
 
       options[:maxInterpretations] ||= options.delete(:max)
       options[:allowedSources] ||= options.delete(:sources)

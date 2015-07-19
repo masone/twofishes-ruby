@@ -2,9 +2,9 @@ require 'delegate'
 module Twofishes
   class Result < SimpleDelegator
     def self.from_response(response)
-      response.interpretations.map { |interpretation|
+      response.interpretations.map do |interpretation|
         new(interpretation)
-      }
+      end
     end
   end
 end

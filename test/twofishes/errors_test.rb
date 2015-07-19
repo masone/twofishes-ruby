@@ -3,7 +3,7 @@ require 'test_helper'
 describe Twofishes::InvalidResponseError do
   it 'should raise InvalidResponseError' do
     assert_raises Twofishes::InvalidResponseError do
-      raise Twofishes::InvalidResponseError, 'test'
+      fail Twofishes::InvalidResponseError, 'test'
     end
   end
 

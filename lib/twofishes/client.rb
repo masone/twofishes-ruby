@@ -45,8 +45,6 @@ module Twofishes
       )
     end
 
-    private
-
     def self.handle_response
       Result.from_response(yield)
     rescue => e
