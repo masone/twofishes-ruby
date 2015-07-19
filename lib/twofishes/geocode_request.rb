@@ -38,14 +38,12 @@ module Twofishes
     end
 
     def substitute_aliases(options)
-      options = options.dup
+      options = Hash[options.map{|k,v| [k.to_s.camelize(:lower).to_sym,v] } ]
 
-      options[:maxInterpretations] ||= options.delete(:max_interpretations) || options.delete(:max)
-      options[:allowedSources] ||= options.delete(:allowed_sources) || options.delete(:sources)
-      options[:responseIncludes] ||= options.delete(:response_includes) || options.delete(:includes)
-      options[:woeHint] ||= options.delete(:woe_hint)
-      options[:woeRestrict] ||= options.delete(:woe_restrict)
-      options[:autocompleteBias] ||= options.delete(:autocomplete_bias) || options.delete(:bias)
+      options[:maxInterpretations] ||= options.delete(:max)
+      options[:allowedSources] ||= options.delete(:sources)
+      options[:responseIncludes] ||= options.delete(:includes)
+      options[:autocompleteBias] ||= options.delete(:bias)
 
       if options[:ll].kind_of? Hash
         options[:ll][:lng] = options[:ll][:lon] if options[:ll][:lon]
