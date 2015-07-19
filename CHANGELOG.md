@@ -1,5 +1,10 @@
 # Change Log
 
+## 2.1.0.pre
+
+- Added a `connect_timeout` configuration option. [arepalabs, sd]
+- Support more geocode endpoint parameters as defined [in Twofishes' GeocodeRequest](https://github.com/foursquare/twofishes/blob/master/interface/src/main/thrift/geocoder.thrift#L303). [arepalabs, sd]
+
 ## 2.0.0 (2015-04-02)
 
 - Now uses thrift instead of REST which is up to [60% faster](https://github.com/masone/twofishes-ruby/pull/4#issuecomment-74030852). [mrfoto, barthez]

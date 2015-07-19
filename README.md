@@ -33,12 +33,13 @@ $ gem install twofishes
 Twofishes.configure do |config|
   config.host = '127.0.0.1' # server address
   config.port = 8080 # thrift port
-  config.timeout = 3 # timeout in seconds
+  config.timeout = 3 # request timeout in seconds
+  config.connect_timeout = 0.5 # connection timeout in seconds
   config.retries = 2 # how many times to retry a request
 end
 ```
 
-Timeouts are enforced per-try, so if you have a timeout of n and do m retries, the total time it could take is n*m.
+Request timeouts are enforced per-try, so if you have a timeout of n and do m retries, the total time it could take is n*m.
 
 ## Usage
 
@@ -54,6 +55,15 @@ If you want the Twofishes server to return fields that are not included by defau
 ```ruby                                      
 Twofishes::Client.geocode('Zurich', includes: [ResponseIncludes::PARENTS])
 ```
+
+Additional options are directly passed to the Twofishes server. You can for example give a language hint by doing:
+
+```ruby
+Twofishes::Client.geocode('Zurich', lang: 'de')
+```
+
+For more parameters, have a look at the [Twofishes' GeocodeRequest](https://github.com/foursquare/twofishes/blob/master/interface/src/main/thrift/geocoder.thrift#L303) struct.
+
 
 ## Compatibility
 

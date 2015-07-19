@@ -7,7 +7,7 @@ Gem::Specification.new do |spec|
   spec.name          = 'twofishes'
   spec.version       = Twofishes::VERSION
   spec.license       = 'MIT'
-  spec.authors       = ['Christian Felder', 'Miha Rekar', 'Bartek Bułat']
+  spec.authors       = ['Christian Felder', 'Miha Rekar', 'Bartek Bułat', 'Sebastian Delmont']
   spec.email         = ['ema@rh-productions.ch']
   spec.summary       = "Client for foursquare's Twofishes API, a sparse reverse geocoder."
   spec.description   = "Client for foursquare's Twofishes API, a sparse reverse geocoder."
