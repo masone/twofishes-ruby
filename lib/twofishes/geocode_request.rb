@@ -45,15 +45,6 @@ module Twofishes
       options[:responseIncludes] ||= options.delete(:includes)
       options[:autocompleteBias] ||= options.delete(:bias)
 
-      if options[:ll].kind_of? Hash
-        options[:ll][:lng] = options[:ll][:lon] if options[:ll][:lon]
-      end
-
-      if options[:bounds].kind_of? Hash
-        options[:bounds][:ne_lng] = options[:bounds][:ne_lon] if options[:bounds] and options[:bounds][:ne_lon]
-        options[:bounds][:sw_lng] = options[:bounds][:sw_lon] if options[:bounds] and options[:bounds][:sw_lon]
-      end
-
       options
     end
 
