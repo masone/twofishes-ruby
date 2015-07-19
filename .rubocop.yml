@@ -1,0 +1,13 @@
+AllCops:
+  Exclude:
+    - 'lib/thrift/*' # Auto generated code by Thrift
+
+Metrics/LineLength:
+  Max: 112
+  Enabled: false
+
+Metrics/MethodLength:
+  Max: 15
+
+Style/Documentation:
+  Enabled: false
